@@ -5,10 +5,17 @@ let moveDistance = 0  //手指移动的距离
 Page({
     data: {
         coverTransform:'translateY(0rpx)',
-        coverTransition:''
+        coverTransition:'',
+        userInfo:{}
     },
     onLoad: function (options) {
-
+        //读取用户的基本信息
+        let userInfo = wx.getStorageSync('userInfo')
+        if (userInfo){
+            this.setData({
+                userInfo:JSON.parse(userInfo)
+            })
+        }
     },
     handleTouchStart(event){
         this.setData({
@@ -36,6 +43,13 @@ Page({
         })
         this.setData({
             coverTransition:'transform 1s linear'
+        })
+    },
+
+    //跳转至登陆界面的回调
+    toLogin(){
+        wx.navigateTo({
+            url:'/pages/login/login'
         })
     }
 });

@@ -30,16 +30,18 @@ Page({
     //获取排行榜数据
     let  index = 0
     let resultArr = []
-    while (index<5){
-      let topListData = await request('/top/list',{idx:index++})
-      //splice(会修改原数组，对自定数组进行增删改) slice(不会修改原数组)
-      let topListItem = {name:topListData.playlist.name,tracks:topListData.playlist.tracks.slice(0,3)}
-      resultArr.push(topListItem)
-      //放在这里更新，每次请求都更新，用户体验好，但渲染次数多一些
-      this.setData({
-        topList:resultArr
-      })
-    }
+    // while (index<5){
+    //   let topListData = await request('/top/list',{idx:index++})
+    //   //splice(会修改原数组，对自定数组进行增删改) slice(不会修改原数组)
+    //   let topListItem = {name:topListData.playlist.name,tracks:topListData.playlist.tracks.slice(0,3)}
+    //   resultArr.push(topListItem)
+    //   //放在这里更新，每次请求都更新，用户体验好，但渲染次数多一些
+    //   this.setData({
+    //     topList:resultArr
+    //   })
+    // }
+    let topListData = await request('/toplist')
+    console.log(topListData)
     //更新值
     //放在此处更新会导致发请求的过程中页面长时间白屏，用户体验差
     // this.setData({
