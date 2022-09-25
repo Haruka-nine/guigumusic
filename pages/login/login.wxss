@@ -24,6 +24,7 @@
     padding: 0 60rpx;
 }
 .input-item{
+    position: relative;
     display:flex;
     flex-direction: column;
     align-items:flex-start;
@@ -86,4 +87,11 @@
 .register-section text{
     color: #4399fc;
     margin-left: 10rpx;
+}
+
+.code{
+    position: absolute;
+    right: 20rpx;
+    background: lightskyblue;
+
 }

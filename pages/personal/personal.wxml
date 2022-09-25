@@ -1,7 +1,7 @@
 <view class="personalContainer">
     <view class="user-section">
         <image class="bg" src="/static/images/personal/bgImg2.jpg"></image>
-        <view wx:if="{{userInfo.avatarUrl}}" class="user-info-box">
+        <view wx:if="{{isShow}}" class="user-info-box">
             <view class="portrait-box">
                 <image class="portrait" src='{{userInfo.avatarUrl}}'></image>
             </view>
@@ -67,6 +67,13 @@
             <view class="recentPlayContainer">
                 <text class="title">最近播放</text>
                 <!-- 最近播放记录 -->
+                <scroll-view wx:if="{{recentPlayList.length>0}}" scroll-x class="recentScroll" enable-flex>
+                    <view class="recentItem" wx:for="{{recentPlayList}}" wx:key="song.al.id">
+                        <image src="{{item.song.al.picUrl}}"></image>
+                    </view>
+                </scroll-view>
+
+                <view wx:else style="margin-left: 20rpx;">暂无播放记录</view>
             </view>
 
             <view class="cardList">

@@ -12,15 +12,24 @@
  *
  */
 import config from "./config";
-export default (url,data,method='GET')=>{
+export default (url,data={},method='GET')=>{
     return new Promise((resolve, reject)=>{
         //1.new promise 初始化promise实例的状态为pending
         wx.request({
             url:config.host+url,
             data,
+            header:{
+                Cookie: 'MUSIC_U='+wx.getStorageSync('cookies')
+            },
             method,
             success:(res)=>{
                 // console.log('请求成功',res)
+                if (data.isLogin){
+                    wx.setStorage({
+                        key:'cookies',
+                        data:res.data.token
+                    })
+                }
                 resolve(res.data)
             },
             fail:(err)=>{

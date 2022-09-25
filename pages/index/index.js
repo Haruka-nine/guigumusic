@@ -41,13 +41,25 @@ Page({
     //   })
     // }
     let topListData = await request('/toplist')
-    console.log(topListData)
+    while(index<5){
+      let topList = await request('/playlist/detail',{id:topListData.list[index++].id})
+      let topListItem = {name:topList.playlist.name,tracks:topList.playlist.tracks.slice(0,3)}
+      resultArr.push(topListItem)
+      this.setData({
+        topList:resultArr
+      })
+    }
     //更新值
     //放在此处更新会导致发请求的过程中页面长时间白屏，用户体验差
     // this.setData({
     //   topList:resultArr
     // })
 
+  },
+  toRecommendSong(){
+    wx.navigateTo({
+      url:'/pages/recommendSong/recommendSong'
+    })
   },
 
   /**
